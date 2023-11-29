@@ -5,10 +5,15 @@ import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 import logica.ListaLibros;
 import logica.Libro;
+import logica.Prestamo;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 @WebServlet(name = "RealizarPrestamoServlet", urlPatterns = {"/realizarPrestamo"})
@@ -46,8 +51,14 @@ public class RealizarPrestamoServlet extends HttpServlet {
             response.sendRedirect("index.jsp");
         }
         else {
-            session.setAttribute("errorMensaje", null);
 
+            session.setAttribute("errorMensaje", null);
+            LocalDateTime fechaPrestamo = LocalDateTime.now();
+            LocalDateTime fechaDevolucion = fechaPrestamo.plusDays(15);
+            DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String fechaPrestamoFormateada = fechaPrestamo.format(formato);
+            String fechaDevolucionFormateda = fechaDevolucion.format(formato);
+            Prestamo prestamo = new Prestamo("");
             doGet(request, response);
         }
     }
