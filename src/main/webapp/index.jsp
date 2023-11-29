@@ -1,6 +1,13 @@
+<<<<<<< Updated upstream
+<html>
+<body>
+<h2>Hello World!</h2>
+=======
 <%@ page import="logica.*" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Collections" %>
+<%@ page import="java.util.Comparator" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -51,7 +58,7 @@
                 List<Libro> libros = (List) request.getSession().getAttribute("listaLibros");
                 String disponibilidad;
                 for (Libro libro : libros) {
-                    disponibilidad = libro.isDisponibilidad() ? "Disponible" : "No disponible";
+                    disponibilidad = libro.isDisponibilidad() ? "Disponible" : "Prestado";
             %>
             <tr>
                 <td><%=libro.getTitulo()%>
@@ -118,17 +125,6 @@
         </tbody>
     </table>
 </div>
+>>>>>>> Stashed changes
 </body>
-
-<script>
-    function abrirNuevaVentana() {
-        var isbn = document.getElementById('isbnLibro').value;
-
-        var url = "detallesLibro.jsp?isbn=" + isbn;
-
-        window.open(url, "_blank", "width=600,height=400");
-
-        return false;
-    }
-</script>
 </html>

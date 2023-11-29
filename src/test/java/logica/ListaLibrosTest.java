@@ -43,9 +43,9 @@ public class ListaLibrosTest {
     @Test
     public void given_bookList_when_changeBookAvailability_then_true(){
         String isbn = "isbn1";
-        System.out.println("Disponibilidad antes: " + claseListaLibros.buscarLibro(isbn).isDisponibilidad());
+        System.out.println("Disponibilidad antes: " + claseListaLibros.buscarLibro("isbn",isbn).isDisponibilidad());
         boolean valor = claseListaLibros.cambiarDisponibilidadLibro(isbn);
-        System.out.println("Disponibilidad después: " + claseListaLibros.buscarLibro(isbn).isDisponibilidad());
+        System.out.println("Disponibilidad después: " + claseListaLibros.buscarLibro("isbn",isbn).isDisponibilidad());
         assertEquals(false, valor);
     }
 

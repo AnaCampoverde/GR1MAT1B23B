@@ -2,6 +2,8 @@ package logica;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ListaLibros {
 
@@ -66,10 +68,36 @@ public class ListaLibros {
         return false;
     }
 
-    public Libro buscarLibro(String isbn) {
-        for (Libro libro : this.listaLibros) {
-            if (libro.getIsbn().equals(isbn)){
-                return libro;
+    public Libro buscarLibro(String parametro,String busqueda) {
+
+        switch (parametro){
+            case "autor":{
+                for (Libro libro : this.listaLibros) {
+                    if (libro.getAutor().equals(busqueda)){
+                        return libro;
+                    }
+                }
+            }
+            case "titulo":{
+                for (Libro libro : this.listaLibros) {
+                    if (libro.getTitulo().equals(busqueda)){
+                        return libro;
+                    }
+                }
+            }
+            case "genero":{
+                for (Libro libro : this.listaLibros) {
+                    if (libro.getGenero().equals(busqueda)){
+                        return libro;
+                    }
+                }
+            }
+            case "isbn":{
+                for (Libro libro : this.listaLibros) {
+                    if (libro.getIsbn().equals(busqueda)){
+                        return libro;
+                    }
+                }
             }
         }
         return null;
