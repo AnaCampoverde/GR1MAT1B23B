@@ -59,14 +59,4 @@ public class Libro {
         this.disponibilidad = disponibilidad;
     }
 
-    public static List<Libro> verificarLibrosDisponibles(List<Libro> listaLibros) {
-        List<Libro> librosValidos = new ArrayList<>();
-
-        for (Libro libro : listaLibros) {
-            if (libro.isDisponibilidad()) {
-                librosValidos.add(libro);
-            }
-        }
-        return librosValidos;
-    }
 }
