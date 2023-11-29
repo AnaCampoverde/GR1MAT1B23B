@@ -5,32 +5,30 @@ import java.util.List;
 
 public class ListaPrestamos {
 
-    List<Prestamo> listaPrestamos;
-    ListaLibros listaLibros;
+    private static List<Prestamo> listaPrestamos;
+    private static ListaLibros listaLibros;
 
     public ListaPrestamos() {
         this.listaPrestamos = new ArrayList<Prestamo>();
         this.listaLibros = new ListaLibros();
     }
 
-    public boolean realizarPrestamo(Prestamo prestamo){
+    public static boolean realizarPrestamo(Prestamo prestamo){
         listaPrestamos.add(prestamo);
         listaLibros.cambiarDisponibilidadLibro(prestamo.getIsbn());
         return false;
     }
 
-    public String getNewId() {
+    public static String getNewId() {
         // Verificar si la lista está vacía
-        if (lista == null || lista.isEmpty()) {
+        if (listaPrestamos == null || listaPrestamos.isEmpty()) {
             return "001";
         } else {
             // Obtener el último elemento de la lista
-            String ultimoElemento = lista.get(lista.size() - 1);
+            Prestamo ultimoElemento = listaPrestamos.get(listaPrestamos.size() - 1);
 
-            // Convertir a entero y aumentar en uno
-            int numeroSiguiente = Integer.parseInt(ultimoElemento) + 1;
+            int numeroSiguiente = Integer.parseInt(ultimoElemento.getIdPrestamo()) + 1;
 
-            // Formatear el resultado y devolverlo
             return String.format("%03d", numeroSiguiente);
         }
     }

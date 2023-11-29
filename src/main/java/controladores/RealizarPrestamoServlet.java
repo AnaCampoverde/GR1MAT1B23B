@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 import logica.ListaLibros;
 import logica.Libro;
+import logica.ListaPrestamos;
 import logica.Prestamo;
 
 import java.io.IOException;
@@ -18,19 +19,23 @@ import java.time.format.DateTimeFormatter;
 
 @WebServlet(name = "RealizarPrestamoServlet", urlPatterns = {"/realizarPrestamo"})
 public class RealizarPrestamoServlet extends HttpServlet {
-    private ListaLibros listaLibros = new ListaLibros();
+    private ListaLibros listaLibros ;
+    private ListaPrestamos listaPrestamos;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @Override
     public void init() {
-
+        listaLibros = new ListaLibros();
+        listaPrestamos = new ListaPrestamos();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
-        List<Libro> listaLibrosDisponibles = listaLibros.verificarLibrosDisponibles();
-
         HttpSession sesion = req.getSession();
+
+        List<Libro> listaLibrosDisponibles = listaLibros.verificarLibrosDisponibles();
+        //List<Prestamo> presamos = (List<Prestamo>) sesion.getAttribute("listaPrestamo");
+
         sesion.setAttribute("listaLibros", listaLibrosDisponibles);
 
         response.sendRedirect("index.jsp");
@@ -39,7 +44,7 @@ public class RealizarPrestamoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idUsuario = "202010586";
-        String isbn = request.getParameter("isbn");
+        String isbn = request.getParameter("isbnLibro");
         HttpSession session = request.getSession();
 
         if (!listaLibros.validadIDLibro(isbn)) {
@@ -58,8 +63,12 @@ public class RealizarPrestamoServlet extends HttpServlet {
             DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String fechaPrestamoFormateada = fechaPrestamo.format(formato);
             String fechaDevolucionFormateda = fechaDevolucion.format(formato);
-            Prestamo prestamo = new Prestamo("");
-            doGet(request, response);
+            String id = ListaPrestamos.getNewId();
+            Prestamo prestamo = new Prestamo(id, isbn, idUsuario, fechaPrestamoFormateada, fechaDevolucionFormateda);
+            if (listaPrestamos.realizarPrestamo(prestamo)) {
+                session.setAttribute("listaPrestamo", listaPrestamos.getListaPrestamos());
+                doGet(request, response);
+            }
         }
     }
 }

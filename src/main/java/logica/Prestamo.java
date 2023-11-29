@@ -4,10 +4,9 @@ import java.util.Date;
 
 public class Prestamo {
 
-    private String idPrestamo, isbn, idUsuario;
-    private Date fechaPrestamo, fechaDevolucion;
+    private String idPrestamo, isbn, idUsuario, fechaPrestamo, fechaDevolucion;
 
-    public Prestamo(String idPrestamo, String isbn, String idUsuario, Date fechaPrestamo, Date fechaDevolucion) {
+    public Prestamo(String idPrestamo, String isbn, String idUsuario, String fechaPrestamo, String fechaDevolucion) {
         this.idPrestamo = idPrestamo;
         this.isbn = isbn;
         this.idUsuario = idUsuario;
@@ -39,19 +38,19 @@ public class Prestamo {
         this.idUsuario = idUsuario;
     }
 
-    public Date getFechaPrestamo() {
+    public String getFechaPrestamo() {
         return fechaPrestamo;
     }
 
-    public void setFechaPrestamo(Date fechaPrestamo) {
+    public void setFechaPrestamo(String fechaPrestamo) {
         this.fechaPrestamo = fechaPrestamo;
     }
 
-    public Date getFechaDevolucion() {
+    public String getFechaDevolucion() {
         return fechaDevolucion;
     }
 
-    public void setFechaDevolucion(Date fechaDevolucion) {
+    public void setFechaDevolucion(String fechaDevolucion) {
         this.fechaDevolucion = fechaDevolucion;
     }
 }
