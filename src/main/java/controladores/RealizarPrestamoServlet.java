@@ -34,11 +34,11 @@ public class RealizarPrestamoServlet extends HttpServlet {
         HttpSession sesion = req.getSession();
 
         List<Libro> listaLibrosDisponibles = listaLibros.verificarLibrosDisponibles();
-        //List<Prestamo> presamos = (List<Prestamo>) sesion.getAttribute("listaPrestamo");
+        List<Prestamo> presamos = (List<Prestamo>) sesion.getAttribute("listaPrestamo");
 
         sesion.setAttribute("listaLibros", listaLibrosDisponibles);
 
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("RealizarPrestamo.jsp");
     }
 
     @Override
@@ -49,11 +49,11 @@ public class RealizarPrestamoServlet extends HttpServlet {
 
         if (!listaLibros.validadIDLibro(isbn)) {
             session.setAttribute("errorMensaje", "Error: ID de libro inválido.");
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("RealizarPrestamo.jsp");
         }
         else if (!listaLibros.cambiarDisponibilidadLibro(isbn)){
             session.setAttribute("errorMensaje", "Error: No se pudo cambiar la disponibilidad.");
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("RealizarPrestamo.jsp");
         }
         else {
 
