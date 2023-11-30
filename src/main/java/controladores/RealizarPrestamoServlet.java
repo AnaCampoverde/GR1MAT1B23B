@@ -19,7 +19,8 @@ import java.time.format.DateTimeFormatter;
 
 @WebServlet(name = "RealizarPrestamoServlet", urlPatterns = {"/realizarPrestamo"})
 public class RealizarPrestamoServlet extends HttpServlet {
-    private ListaLibros listaLibros ;
+
+    private static ListaLibros listaLibros ;
     private ListaPrestamos listaPrestamos;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -78,5 +79,9 @@ public class RealizarPrestamoServlet extends HttpServlet {
                 doGet(request, response);
             }
         }
+    }
+
+    public static ListaLibros getListaLibros() {
+        return listaLibros;
     }
 }

@@ -73,28 +73,28 @@ public class ListaLibros {
 
         switch (parametro) {
             case "autor": {
-                for (Libro libro : this.listaLibros) {
+                for (Libro libro : verificarLibrosDisponibles()) {
                     if (libro.getAutor().equals(busqueda)) {
                         return libro;
                     }
                 }
             }
             case "titulo": {
-                for (Libro libro : this.listaLibros) {
+                for (Libro libro : verificarLibrosDisponibles()) {
                     if (libro.getTitulo().equals(busqueda)) {
                         return libro;
                     }
                 }
             }
             case "genero": {
-                for (Libro libro : this.listaLibros) {
+                for (Libro libro : verificarLibrosDisponibles()) {
                     if (libro.getGenero().equals(busqueda)) {
                         return libro;
                     }
                 }
             }
             case "isbn": {
-                for (Libro libro : this.listaLibros) {
+                for (Libro libro : verificarLibrosDisponibles()) {
                     if (libro.getIsbn().equals(busqueda)) {
                         return libro;
                     }
@@ -132,6 +132,11 @@ public class ListaLibros {
                 break;
             }
         }
-        return listaFiltrada;
+        return ordenarListaPorTitulo(listaFiltrada);
+    }
+
+    private List<Libro> ordenarListaPorTitulo(List<Libro> lista) {
+        Collections.sort(lista, Comparator.comparing(Libro::getTitulo));
+        return lista;
     }
 }

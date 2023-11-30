@@ -23,7 +23,7 @@ public class BuscarLibrosServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        listaLibros = new ListaLibros();
+        listaLibros = RealizarPrestamoServlet.getListaLibros();
     }
 
     @Override
