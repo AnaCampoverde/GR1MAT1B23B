@@ -20,7 +20,7 @@
     <p>Realice la búsqueda del libro que desea pedir prestado e ingrese el código ISBN para solicitarlo.</p>
 
     <div class="formulario">
-        <form action="buscarLibro" method="post">
+        <form action="buscarLibros" method="post">
             <label for="parametroBusqueda">&nbsp;&nbsp;&nbsp;Buscar libros:</label>
             <select name="parametroBusqueda" id="parametroBusqueda">
                 <option value="autor">Autor</option>
@@ -28,7 +28,6 @@
                 <option value="genero">Género</option>
             </select>
             <input type="text" id="busqueda" name="busqueda" placeholder="Ingrese la búsqueda aquí">
-
             <button type="submit">Buscar</button>
         </form>
 
@@ -82,10 +81,9 @@
     </tr>
 
     <div class="formulario">
-        <form action="realizarPrestamo" method="post" onsubmit="return abrirNuevaVentana()">
+        <form action="realizarPrestamo" method="post" >
             <label for="isbnLibro">&nbsp;&nbsp;&nbsp;ISBN del libro a pedir:</label>
             <input type="text" id="isbnLibro" name="isbnLibro" placeholder="Ingrese el ISBN aquí">
-
             <button type="submit">Aceptar</button>
         </form>
     </div>
@@ -104,7 +102,7 @@
         </thead>
         <tbody>
         <%
-            List<Prestamo> listaPrestamo = (List<Prestamo>) request.getSession().getAttribute("listaPrestamos");
+            List<Prestamo> listaPrestamo = (List) request.getSession().getAttribute("listaPrestamos");
             if(listaPrestamo == null) listaPrestamo = new ArrayList<>();
             for (Prestamo prestamo : listaPrestamo) {
         %>
@@ -125,14 +123,5 @@
     </table>
 </div>
 </body>
-
-<script>
-    function abrirNuevaVentana() {
-        var isbn = document.getElementById('isbnLibro').value;
-        var url = "reciboPrestamo.jsp?isbn=" + isbn;
-        window.open(url, "_blank", "width=600,height=400");
-        return false;
-    }
-</script>
 </html>
 

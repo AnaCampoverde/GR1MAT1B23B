@@ -102,4 +102,32 @@ public class ListaLibros {
         }
         return null;
     }
+
+    public List<Libro> filtrarListaPorParametro(String parametro, String busqueda) {
+        List<Libro> listaFiltrada = new ArrayList<Libro>();
+        switch (parametro){
+            case "autor":{
+                for (Libro libro : this.listaLibros) {
+                    if (libro.getAutor().equals(busqueda)){
+                        listaFiltrada.add(libro);
+                    }
+                }
+            }
+            case "titulo":{
+                for (Libro libro : this.listaLibros) {
+                    if (libro.getTitulo().equals(busqueda)){
+                        listaFiltrada.add(libro);
+                    }
+                }
+            }
+            case "genero":{
+                for (Libro libro : this.listaLibros) {
+                    if (libro.getGenero().equals(busqueda)){
+                        listaFiltrada.add(libro);
+                    }
+                }
+            }
+        }
+        return listaFiltrada;
+    }
 }

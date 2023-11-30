@@ -34,10 +34,10 @@ public class RealizarPrestamoServlet extends HttpServlet {
         HttpSession sesion = req.getSession();
 
         List<Libro> listaLibrosDisponibles = listaLibros.verificarLibrosDisponibles();
-        List<Prestamo> presamos = (List<Prestamo>) sesion.getAttribute("listaPrestamo");
+        List<Prestamo> prestamos = (List<Prestamo>) sesion.getAttribute("listaPrestamo");
 
         sesion.setAttribute("listaLibros", listaLibrosDisponibles);
-
+        sesion.setAttribute("listaPrestamos", prestamos);
         response.sendRedirect("RealizarPrestamo.jsp");
     }
 
@@ -51,12 +51,11 @@ public class RealizarPrestamoServlet extends HttpServlet {
             session.setAttribute("errorMensaje", "Error: ID de libro inválido.");
             response.sendRedirect("RealizarPrestamo.jsp");
         }
-        else if (!listaLibros.cambiarDisponibilidadLibro(isbn)){
+        else if (listaLibros.cambiarDisponibilidadLibro(isbn)){
             session.setAttribute("errorMensaje", "Error: No se pudo cambiar la disponibilidad.");
             response.sendRedirect("RealizarPrestamo.jsp");
         }
         else {
-
             session.setAttribute("errorMensaje", null);
             LocalDateTime fechaPrestamo = LocalDateTime.now();
             LocalDateTime fechaDevolucion = fechaPrestamo.plusDays(15);
