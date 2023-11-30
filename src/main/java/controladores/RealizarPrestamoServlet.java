@@ -46,6 +46,14 @@ public class RealizarPrestamoServlet extends HttpServlet {
         String idUsuario = "202010586";
         String isbn = request.getParameter("isbnLibro");
         HttpSession session = request.getSession();
+        Libro libro = new Libro();
+        List<Libro> libros = (List) session.getAttribute("listaLibros");
+        for (Libro lib : libros) {
+            if(lib.getIsbn().equals(isbn)){
+                libro = lib;
+            }
+        }
+        session.setAttribute("libroPrestado", libro);
 
         if (!listaLibros.validadIDLibro(isbn)) {
             session.setAttribute("errorMensaje", "Error: ID de libro inválido.");
@@ -56,6 +64,7 @@ public class RealizarPrestamoServlet extends HttpServlet {
             response.sendRedirect("RealizarPrestamo.jsp");
         }
         else {
+
             session.setAttribute("errorMensaje", null);
             LocalDateTime fechaPrestamo = LocalDateTime.now();
             LocalDateTime fechaDevolucion = fechaPrestamo.plusDays(15);
@@ -64,7 +73,7 @@ public class RealizarPrestamoServlet extends HttpServlet {
             String fechaDevolucionFormateda = fechaDevolucion.format(formato);
             String id = ListaPrestamos.getNewId();
             Prestamo prestamo = new Prestamo(id, isbn, idUsuario, fechaPrestamoFormateada, fechaDevolucionFormateda);
-            if (listaPrestamos.realizarPrestamo(prestamo)) {
+            if (!listaPrestamos.realizarPrestamo(prestamo)) {
                 session.setAttribute("listaPrestamo", listaPrestamos.getListaPrestamos());
                 doGet(request, response);
             }

@@ -15,8 +15,7 @@ public class ListaPrestamos {
 
     public static boolean realizarPrestamo(Prestamo prestamo){
         listaPrestamos.add(prestamo);
-        listaLibros.cambiarDisponibilidadLibro(prestamo.getIsbn());
-        return false;
+        return listaLibros.cambiarDisponibilidadLibro(prestamo.getIsbn());
     }
 
     public static String getNewId() {
@@ -31,6 +30,12 @@ public class ListaPrestamos {
 
             return String.format("%03d", numeroSiguiente);
         }
+    }
+
+    public static String getLastId() {
+        Prestamo ultimoElemento = listaPrestamos.get(listaPrestamos.size() - 1);
+
+        return ultimoElemento.getIdPrestamo();
     }
 
 

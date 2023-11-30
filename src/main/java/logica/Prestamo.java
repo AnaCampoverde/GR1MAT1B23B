@@ -6,6 +6,9 @@ public class Prestamo {
 
     private String idPrestamo, isbn, idUsuario, fechaPrestamo, fechaDevolucion;
 
+    public Prestamo() {
+    }
+
     public Prestamo(String idPrestamo, String isbn, String idUsuario, String fechaPrestamo, String fechaDevolucion) {
         this.idPrestamo = idPrestamo;
         this.isbn = isbn;

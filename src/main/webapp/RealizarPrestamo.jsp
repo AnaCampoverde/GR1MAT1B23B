@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/realizarPrestamo.css">
-    <title>Solicitar Préstamo</title>
+    <title>Realizar Préstamo</title>
 </head>
 
 <body>
@@ -28,6 +28,7 @@
                 <option value="genero">Género</option>
             </select>
             <input type="text" id="busqueda" name="busqueda" placeholder="Ingrese la búsqueda aquí">
+
             <button type="submit">Buscar</button>
         </form>
 
@@ -81,8 +82,8 @@
     </tr>
 
     <div class="formulario">
-        <form action="realizarPrestamo" method="post" >
-            <label for="isbnLibro">&nbsp;&nbsp;&nbsp;ISBN del libro a pedir:</label>
+        <form action="realizarPrestamo" method="post" onsubmit="return abrirNuevaVentana()">
+            <label for="isbnLibro">ISBN del libro a pedir:</label>
             <input type="text" id="isbnLibro" name="isbnLibro" placeholder="Ingrese el ISBN aquí">
             <button type="submit">Aceptar</button>
         </form>
@@ -102,7 +103,7 @@
         </thead>
         <tbody>
         <%
-            List<Prestamo> listaPrestamo = (List) request.getSession().getAttribute("listaPrestamos");
+            List<Prestamo> listaPrestamo = (List<Prestamo>) request.getSession().getAttribute("listaPrestamos");
             if(listaPrestamo == null) listaPrestamo = new ArrayList<>();
             for (Prestamo prestamo : listaPrestamo) {
         %>
@@ -123,5 +124,13 @@
     </table>
 </div>
 </body>
+
+<script>
+    function abrirNuevaVentana() {
+        var url = "reciboPrestamo.jsp";
+        window.open(url, "_blank", "width=600,height=1000");
+        return true;
+    }
+</script>
 </html>
 

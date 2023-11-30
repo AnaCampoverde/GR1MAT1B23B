@@ -17,7 +17,7 @@ public class ListaLibros {
         this.listaLibros = listaLibros;
     }
 
-    public ListaLibros(){
+    public ListaLibros() {
         listaLibros = new ArrayList<Libro>();
         listaLibros.add(new Libro("1984", "George Orwell", "Ficción",
                 "978-0451524935", true));
@@ -38,6 +38,7 @@ public class ListaLibros {
         listaLibros.add(new Libro("El nombre del viento", "Patrick Rothfuss", "Fantasía",
                 "978-8499082479", true));
     }
+
     public List<Libro> verificarLibrosDisponibles() {
         List<Libro> librosValidos = new ArrayList<>();
 
@@ -49,9 +50,9 @@ public class ListaLibros {
         return librosValidos;
     }
 
-    public boolean cambiarDisponibilidadLibro(String isbn){
+    public boolean cambiarDisponibilidadLibro(String isbn) {
         for (Libro libro : this.listaLibros) {
-            if (libro.getIsbn().equals(isbn)){
+            if (libro.getIsbn().equals(isbn)) {
                 libro.setDisponibilidad(!libro.isDisponibilidad());
                 return libro.isDisponibilidad();
             }
@@ -61,40 +62,40 @@ public class ListaLibros {
 
     public boolean validadIDLibro(String isbn) {
         for (Libro libro : this.listaLibros) {
-            if (libro.getIsbn().equals(isbn)){
+            if (libro.getIsbn().equals(isbn)) {
                 return true;
             }
         }
         return false;
     }
 
-    public Libro buscarLibro(String parametro,String busqueda) {
+    public Libro buscarLibro(String parametro, String busqueda) {
 
-        switch (parametro){
-            case "autor":{
+        switch (parametro) {
+            case "autor": {
                 for (Libro libro : this.listaLibros) {
-                    if (libro.getAutor().equals(busqueda)){
+                    if (libro.getAutor().equals(busqueda)) {
                         return libro;
                     }
                 }
             }
-            case "titulo":{
+            case "titulo": {
                 for (Libro libro : this.listaLibros) {
-                    if (libro.getTitulo().equals(busqueda)){
+                    if (libro.getTitulo().equals(busqueda)) {
                         return libro;
                     }
                 }
             }
-            case "genero":{
+            case "genero": {
                 for (Libro libro : this.listaLibros) {
-                    if (libro.getGenero().equals(busqueda)){
+                    if (libro.getGenero().equals(busqueda)) {
                         return libro;
                     }
                 }
             }
-            case "isbn":{
+            case "isbn": {
                 for (Libro libro : this.listaLibros) {
-                    if (libro.getIsbn().equals(busqueda)){
+                    if (libro.getIsbn().equals(busqueda)) {
                         return libro;
                     }
                 }
@@ -105,27 +106,30 @@ public class ListaLibros {
 
     public List<Libro> filtrarListaPorParametro(String parametro, String busqueda) {
         List<Libro> listaFiltrada = new ArrayList<Libro>();
-        switch (parametro){
-            case "autor":{
+        switch (parametro) {
+            case "autor": {
                 for (Libro libro : this.listaLibros) {
-                    if (libro.getAutor().equals(busqueda)){
+                    if (libro.getAutor().toLowerCase().contains(busqueda.toLowerCase())) {
                         listaFiltrada.add(libro);
                     }
                 }
+                break;
             }
-            case "titulo":{
+            case "titulo": {
                 for (Libro libro : this.listaLibros) {
-                    if (libro.getTitulo().equals(busqueda)){
+                    if (libro.getTitulo().toLowerCase().contains(busqueda.toLowerCase())) {
                         listaFiltrada.add(libro);
                     }
                 }
+                break;
             }
-            case "genero":{
+            case "genero": {
                 for (Libro libro : this.listaLibros) {
-                    if (libro.getGenero().equals(busqueda)){
+                    if (libro.getGenero().toLowerCase().contains(busqueda.toLowerCase())) {
                         listaFiltrada.add(libro);
                     }
                 }
+                break;
             }
         }
         return listaFiltrada;
