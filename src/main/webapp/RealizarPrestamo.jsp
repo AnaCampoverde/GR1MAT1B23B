@@ -105,6 +105,7 @@
         <tbody>
         <%
             List<Prestamo> listaPrestamo = (List<Prestamo>) request.getSession().getAttribute("listaPrestamos");
+            if(listaPrestamo == null) listaPrestamo = new ArrayList<>();
             for (Prestamo prestamo : listaPrestamo) {
         %>
         <tr>
